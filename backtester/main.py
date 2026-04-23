@@ -43,6 +43,11 @@ else:
     print("\n--- Letzte 15 Tage des Backtests ---")
     print(df[['Price', 'SMA', 'Buy', 'Sell', 'Cumulative_Profit']].tail(15))
 
+    entry = df["Price"].iloc[0]
+    exit = df["Price"].iloc[-1]
+    print("Here's how Buy and Hold compares:")
+    print(f"This is the entry price: {entry}, and here is the exit price: {exit},\n so the total profit is: {exit-entry}")
+
     # 7. Visualisierung (Nutze den richtigen Spaltennamen!)
     plt.figure(figsize=(10, 5))
     df['Cumulative_Profit'].plot(title=f"Kumulierter Profit: {ticker}")
@@ -50,3 +55,7 @@ else:
     plt.grid(True)
     plt.ylabel("Profit in USD")
     plt.show()
+
+    
+
+    
