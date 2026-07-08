@@ -113,6 +113,19 @@ else:
     plt.savefig("plots/result.png")
     
     #8 Kalman Filter
+    # The Kalman Filter is a recursive Bayesian estimator that separates the
+    # true underlying price signal from market noise. Unlike SMA (fixed window),
+    # the Kalman Filter is adaptive: it dynamically weights new observations
+    # based on the ratio of process noise (Q) to measurement noise (R).
+    #
+    # Parameters:
+    #   F = 1: state transition (price is assumed constant without new info)
+    #   H = 1: observation model (market price is a direct observation of true price)
+    #   Q = 0.0001: process noise (how much the true price drifts per step)
+    #   R = 0.01: measurement noise (how noisy the market price is)
+    #
+    # A higher Q/R ratio makes the filter react faster (like SMA-20).
+    # A lower Q/R ratio makes the filter smoother (like SMA-200).
     prices = df["Price"].values
     filtered = kf(prices, F=1, H=1, Q=0.0001, R=0.01)
     plt.figure(figsize=(10, 5))
